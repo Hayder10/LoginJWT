@@ -27,13 +27,13 @@ def default():
 #Login Route
 @app.route('/login',methods = ['POST'])
 def login_handle():
-    username = request.json.get('username')
+    email = request.json.get('email')
     password = request.json.get('password')
 
-    if not username : return jsonify({"msg" : "Username is required!"}), 400
+    if not email : return jsonify({"msg" : "Email is required!"}), 400
     if not password : return jsonify({"msg" : "Password is required!"}), 400
 
-    userFound = User.query.filter_by(username = username).first()
+    userFound = User.query.filter_by(email = email).first()
     if not userFound : return jsonify({"status" : "failed" , "msg" : "User not found, sign up instead."}) , 401
     if not check_password_hash(userFound.password,password): return jsonify({"status" : "failed" , "msg" : "Password is incorrect."}), 401
 
@@ -50,14 +50,14 @@ def login_handle():
 #Register Route
 @app.route('/register', methods=['POST'])
 def register():
-    username = request.json.get('username')
+    email = request.json.get('email')
     password = request.json.get('password')
 
-    if not username: return jsonify({"status" : "failed" , "msg" : "Username is required!"}), 400
+    if not email: return jsonify({"status" : "failed" , "msg" : "Email is required!"}), 400
     if not password: return jsonify({"status" : "failed", "msg" : "Password is required!"}), 400
 
     user = User()
-    user.username = username
+    user.email = email
     user.password = generate_password_hash(password)
     user.save()
 

@@ -1,70 +1,99 @@
-# Getting Started with Create React App
+# WebApp boilerplate with React JS
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io#https://github.com/4GeeksAcademy/react-hello-webapp.git)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+<a href="https://www.loom.com/share/f37c6838b3f1496c95111e515e83dd9b"><img src="https://github.com/4GeeksAcademy/react-hello-webapp/blob/master/src/img/how-to.png?raw=true" /></a>
+</p>
 
-## Available Scripts
 
-In the project directory, you can run:
+### Requirements:
+- Make sure you are using node version 10
 
-### `npm start`
+1. Install the packages:
+```
+$ npm install
+```
+2. Create a .env file:
+```
+$ cp .env.example .env
+```
+3. Start coding! and the webpack dev server with live reload, for windows, mac, linux or Gitpod:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+$ npm run start
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Styles
+You can update the `styles/index.css` or create new `.css` files inside `styles/` and import them into your current scss or js files depending on your needs.
 
-### `npm test`
+### Components
+Add more files into your `./src/js/components` or styles folder as you need them and import them into your current files as needed.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Note (New changes)**: Components have been converted into functions to support the use of hooks:
+* Instead of a class component, we're using a `const` function.
+* Class `constructor` and `state` have been replaced by `useState()` hooks.
+* `componentDidMount()` was replaced by `useEffect({}, [])` - It runs at mount thanks to the second parameter (`[]`).
+* `Actions` and `Store` still work the same way.
 
-### `npm run build`
+```jsx
+// Previous "Class Oriented"
+export class Demo extends React.Component {
+	constructor(props) {
+		super(props);
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+		this.state = getState('code here');
+	}
+}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+// New "Functional Oriented"
+export const Demo = () => (
+	const [state, setState] = getState('code here'); //using the state (if needed)
+  const { store, actions } = useContext(Context); // using the context (if needed)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+);
+```
 
-### `npm run eject`
+💡Note: There is an example using the Context API inside `views/demo.js`;
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Views (Components)
+Add more files into your `./src/js/views` and import them in `./src/js/layout.jsx`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Context
+This boilerplate comes with a centralized general Context API. The file `./src/js/store/flux.js` has a base structure for the store, we encourage you to change it and adapt it to your needs.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+React Context [docs](https://reactjs.org/docs/context.html)
+BreathCode Lesson [view](https://content.breatheco.de/lesson/react-hooks-explained)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The `Provider` is already set. You can consume from any component using the useContext hook to get the `store` and `actions` from the Context. Check `/views/demo.js` to see a demo.
 
-## Learn More
+```jsx
+import { Context } from "../store/appContext";
+const MyComponentSuper = () => {
+  //here you use useContext to get store and actions
+  const { store, actions } = useContext(Context);
+  return <div>{/* you can use your actions or store inside the html */}</div>
+}
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Publish your website!
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. **Vercel:** The FREE recomended hosting provider is [vercel.com](https://vercel.com/), you can deploy in 1 minutes by typing the following 2 commands:
 
-### Code Splitting
+Login (you need to have an account):
+```sh
+$ npm i vercel -g && vercel login
+```
+Deploy:
+```sh
+$ vercel --prod
+```
+✎ Note: If you don't have an account just go to vercel.com, create a account and come back here.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![Vercel example procedure to deploy](https://github.com/4GeeksAcademy/react-hello-webapp/blob/4b530ba091a981d3916cc6e960e370decaf2e234/docs/deploy.png?raw=true)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. **Github Pages:** This boilerplate is 100% compatible with the free github pages hosting.
+To publish your website you need to push your code to your github repository and run the following command after:
+```sh
+$ npm run deploy
+```
+Note: You will need to [configure github pages for the branch gh-pages](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/#enabling-github-pages-to-publish-your-site-from-master-or-gh-pages)
