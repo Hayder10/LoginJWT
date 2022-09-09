@@ -7,7 +7,7 @@ function Private() {
   const [name, setName] = useState('')
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/private', {
+    fetch('https://login-jwt-api-hayder10.herokuapp.com/private', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

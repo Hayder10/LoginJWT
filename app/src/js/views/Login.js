@@ -10,7 +10,7 @@ function Login() {
 
 
     const sendDatabase = (userdata) => {
-        fetch('http://127.0.0.1:5000/login', {
+        fetch('https://login-jwt-api-hayder10.herokuapp.com/login', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ function Login() {
                 } else {
                     return response.json()
                 }
-            })
+            }) // if(condición){instrucciones} ----->  (condicion) ? (instruccion1) : (instruccion2)
             .then((data) => { console.log(data); data.status === "success" ? (setLoginSuccess(true), sessionStorage.setItem('token', data.data.access_token, sessionStorage.setItem('user', data.data.user.email))) : null })
             .catch((error) => { console.log(error) })
     }

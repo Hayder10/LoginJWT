@@ -7,7 +7,7 @@ function Register() {
     const [registered, setRegistered] = useState(false)
 
     const sendDatabase = (userdata) => {
-        fetch('http://127.0.0.1:5000/register', {
+        fetch('https://login-jwt-api-hayder10.herokuapp.com/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
